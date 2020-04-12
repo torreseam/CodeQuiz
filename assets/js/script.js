@@ -2,6 +2,8 @@
 var currentQuestionIndex = 0;
 var time = questions.length * 15;
 var timerId;
+var timeLeft = 0;
+var timerEl = document.getElementById("time");
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -11,6 +13,7 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+// var feedbackEl = document.getElementById("end-screen");
 
 
 function startQuiz() {
@@ -26,7 +29,7 @@ function startQuiz() {
 
     // show starting time
     timerEl.textContent = time;
-
+    
     getQuestion();
 }
 
@@ -62,7 +65,7 @@ function questionClick() {
     // check if user guessed wrong
     if (this.value !== questions[currentQuestionIndex].answer) {
         // penalize time
-        time -= 15;
+        time -= 1500;
 
         if (time < 0) {
             time = 0;
@@ -100,7 +103,7 @@ function quizEnd() {
     // show end screen
     var endScreenEl = document.getElementById("end-screen");
     endScreenEl.removeAttribute("class");
-
+ 
     // show final score
     var finalScoreEl = document.getElementById("final-score");
     finalScoreEl.textContent = time;
@@ -124,7 +127,7 @@ function saveHighscore() {
     // get value of input box
     var initials = initialsEl.value.trim();
 
-    // make sure value wasn't empty
+    // Value cant be left empty
     if (initials !== "") {
         // get saved scores from localstorage, or if not any, set to empty array
         var highscores =
@@ -139,9 +142,6 @@ function saveHighscore() {
         // save to localstorage
         highscores.push(newScore);
         window.localStorage.setItem("highscores", JSON.stringify(highscores));
-
-        // redirect to next page
-        window.location.href = "highscores.html";
     }
 }
 
@@ -153,6 +153,7 @@ function checkForEnter(event) {
 }
 
 // user clicks button to submit initials
+var submitBtn = document.getElementById("submit");
 submitBtn.onclick = saveHighscore;
 
 // user clicks button to start quiz
