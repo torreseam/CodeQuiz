@@ -8,3 +8,9 @@ ________________________________________________________________________________
 Built With
     -JavaScript
     -HTML/CSS
+
+Application is available @
+https://torreseam.github.io/CodeQuiz/
+
+Repo available @
+https://github.com/torreseam/CodeQuiz.git
